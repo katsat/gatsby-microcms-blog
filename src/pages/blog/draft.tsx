@@ -25,7 +25,7 @@ const BlogPage = ({ location }) => {
   }
   console.log(data);
 
-  return (
+  return data ? (
     <Layout>
         <SEO title={data.microcmsBlog.title} />
         <span>{data.microcmsBlog.writer.name}</span>
@@ -36,6 +36,8 @@ const BlogPage = ({ location }) => {
         }}
         />
     </Layout>
+  ) : (
+      <div>loading...</div>
   )
 }
 
