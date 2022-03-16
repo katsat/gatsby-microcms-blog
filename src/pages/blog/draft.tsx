@@ -5,9 +5,20 @@ import queryString from "query-string"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 
+type BaseCmsProperties = {
+    id: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+
+type BlogPost = BaseCmsProperties & {
+    title: string
+}
+
 const BlogPage = ({ location }) => {
   const { contentId, draftKey } = queryString.parse(location.search);
-  const [data, setData] = useState({microcmsBlog: [] });
+  const [data, setData] = useState<null | BlogPost>(null)
 
   useEffect(() => {
     if (!contentId || !draftKey) return
@@ -17,7 +28,7 @@ const BlogPage = ({ location }) => {
       },
     })
       .then(res => res.json())
-      .then(res => setData({ microcmsBlog: res }));  // ※1
+      .then(res => setData(res));  // ※1
   }, []);  // ※2
 
   if (data === null) {
@@ -27,14 +38,7 @@ const BlogPage = ({ location }) => {
 
   return data ? (
     <Layout>
-        <SEO title={data.microcmsBlog.title} />
-        <span>{data.microcmsBlog.writer.name}</span>
-        <h1>{data.microcmsBlog.title}</h1>
-        <div
-        dangerouslySetInnerHTML={{
-            __html: `${data.microcmsBlog.body}`,
-        }}
-        />
+        <span>{data.title}</span>
     </Layout>
   ) : (
       <div>loading...</div>
