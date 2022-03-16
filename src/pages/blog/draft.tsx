@@ -10,6 +10,7 @@ const BlogPage = ({ location }) => {
   const [data, setData] = useState({microcmsBlog: [] });
 
   useEffect(() => {
+    if (!contentId || !draftKey) return
     fetch(`https://8w7mnb9ia6.microcms.io/api/v1/blog/${contentId}?draftKey=${draftKey}`, {
       headers: {
         'X-MICROCMS-API-KEY' : "810293baad604761a447483baa169272b2e2",
