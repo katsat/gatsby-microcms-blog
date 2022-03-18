@@ -8,7 +8,7 @@ const BlogPage = ({ data }) => (
   <Layout>
     <SEO title={data.microcmsBlog.title} />
     <span>{data.microcmsBlog.writer.name}</span>
-    <h1>{data.microcmsBlog.title}</h1>
+    <h1 className="text-3xl font-bold underline">{data.microcmsBlog.title}</h1>
     <div
       dangerouslySetInnerHTML={{
         __html: `${data.microcmsBlog.body}`,
