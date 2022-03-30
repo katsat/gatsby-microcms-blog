@@ -3,15 +3,20 @@ import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+import { StaticImage } from "gatsby-plugin-image"
 
 const BlogPage = ({ data }) => (
   <Layout>
     <SEO title={data.microcmsBlog.title} />
-    <span>{data.microcmsBlog.writer.name}</span>
     <h1 className="text-3xl font-bold underline">{data.microcmsBlog.title}</h1>
     <div
       dangerouslySetInnerHTML={{
         __html: `${data.microcmsBlog.body}`,
+      }}
+    />
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `${data.microcmsBlog.html_body}`,
       }}
     />
   </Layout>
@@ -25,9 +30,7 @@ export const query = graphql`
       blogId
       title
       body
-      writer {
-        name
-      }
+      html_body
     }
   }
 `
